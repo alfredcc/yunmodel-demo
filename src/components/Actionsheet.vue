@@ -3,7 +3,7 @@
     <!-- weui_mask -->
     <div class="weui_mask_transition" :class="{'weui_fade_toggle': show}" :style="{display: show ? 'block' : 'none'}" @click="show=false"></div>
     <!-- weui actionsheet -->
-    <div class="weui_actionsheet" :class="{'weui_actionsheet_toggle': show}" style="bottom:55px; background-color:white">
+    <div class="weui_actionsheet" :class="{'weui_actionsheet_toggle': show}" style="bottom:55px; background-color:white;max-width:480px;left:inherit;">
       <div class="drag-button" @click="toggle"></div>
       <!-- cells -->
       <div>
@@ -65,22 +65,20 @@ export default {
 
 .yun-model-actionsheet {
   background-color: white;
-  // position: fixed;
   z-index: 1001;
 }
 
 .drag-button {
   position: absolute;
-  background-repeat:no-repeat;
   cursor: pointer;
-  border:0px;
-  background-size: 43px 16px;
-  width: 43px;
-  height: 16px;
-  top: 0px;
-  left: 50%;
-  margin-right: -22px;
-  margin-top: -16px;
+  background-size: 47px 20px;
+  width: 47px;
+  height: 20px;
+  top: -20px;
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
   background-image: url(../assets/grag.png) ;
   z-index: 1002;
 }
