@@ -21,7 +21,6 @@
         </div>
       </div>
       <div class="invite-button">邀请好友代言-拿20元补贴</div>
-      
     </div>
   </div>
 </template>
@@ -130,7 +129,6 @@ export default {
   background-color: #f4f4f4;
   text-align: center;
 }
-
 
 .cell {
   display: table-cell;
