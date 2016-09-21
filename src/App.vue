@@ -6,12 +6,12 @@
     </div>
     <!-- section header -->
     <div id="section-header">
-      <swiper :loop="true" dots-class="custom-bottom" :show-desc-mask="false" height="500px" dots-position="center" auto>
-        <swiper-item class="swiper-video">
-          <video preload="auto"  controls="true" src="http://static.yunmadou.13980.com/Upload/movie/anessa750_2.mp4" poster="http://static.yunmadou.13980.com/Upload/movie/%E5%AE%89%E5%A5%88%E5%97%AE%E7%85%A7%E7%89%87.jpg@740_-100d"></video>
-          </swiper-item>
-        <swiper-item class="swiper-demo-img">
-          <img src="http://static.yunmadou.13980.com/Upload/movie/index1.png@740w">
+      <swiper :loop="true" dots-class="custom-bottom" :show-desc-mask="false" :aspect-ratio="4/3"dots-position="center">
+        <swiper-item class="custom-swiper-item">
+          <video-play-item :product-info.sync="productInfo" style="object-fit:cover"></video-play-action>
+        </swiper-item>
+        <swiper-item class="swiper-item-img">
+          <img src="http://static.yunmadou.13980.com/Upload/movie/%E9%A6%96%E5%9B%BE2.png@740w">
         </swiper-item>
       </swiper>
     </div>
@@ -34,7 +34,7 @@
     <actionsheet :show.sync="show" :tag-items="tagItems" :subscribed.sync="subscribed"></actionsheet>
     <!-- bottom action -->
     <div class="bottom-action">
-        <div class="button-block" @click="subscribed=true" v-if="!subscribed">代言该产品</div>
+        <div class="button-block" @click="subscribe" v-if="!subscribed">代言该产品</div>
         <div class="bottom-action-subscribed" v-if="subscribed">
           <a href="javascript:;" class="refund-button">提货/退货</a>
           <a href="javascript:;" class="sub-button">订货</a>
@@ -44,6 +44,7 @@
 
 <script>
 import App from './App'
+import VideoPlayItem from './components/VideoPlayItem'
 import NavgationBar from './components/NavgationBar'
 import FeedArticle from './components/FeedArticle'
 import Actionsheet from './components/Actionsheet'
@@ -51,6 +52,12 @@ import Actionsheet from './components/Actionsheet'
 import {Swiper, SwiperItem, Scroller } from 'vux/src/components/'
 
 const dataSource = {
+  productInfo: {
+    price: '188',
+    tag: '全国统一零售价',
+    remain: '100',
+    videoURL: 'http://static.yunmadou.13980.com/Upload/movie/anessa750_2.mp4'
+  },
   list: [
     'http://static.yunmadou.13980.com/Upload/movie/index1.png@740w',
     'http://static.yunmadou.13980.com/Upload/movie/%E9%A6%96%E5%9B%BE2.png@740w',
@@ -109,14 +116,13 @@ const dataSource = {
 
 export default {
   ready() {
-
   },
   data() {
     return {
       show: true,
       subscribed: false,
+      productInfo: dataSource.productInfo,
       tagItems: dataSource.tagItems,
-      isActionSheetHidden: false,
       list: dataSource.list,
       title: dataSource.intro.title,
       discountPrice: dataSource.intro.discountPrice,
@@ -128,13 +134,15 @@ export default {
   components: {
     Swiper,
     SwiperItem,
+    VideoPlayItem,
     FeedArticle,
     Actionsheet,
     NavgationBar
   },
   methods: {
-    hideActionSheet() {
-      this.isActionSheetHidden = !this.isActionSheetHidden
+    subscribe() {
+      this.subscribed = true
+      this.show = true;
     }
   }
 }
@@ -154,11 +162,7 @@ export default {
   background-color: white;
 }
 
-.swiper-video img {
-  height: 400px;
-}
-
-.swiper-img img {
+.swiper-item-img img {
   width: 100%;
 }
 
