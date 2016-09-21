@@ -90,7 +90,7 @@ export default {
 
 .feed-card-bottom {
   margin: auto;
-  padding: 0px 0px 12px 0px;
+  padding: 0px 0px 80px 0px;
   text-align: center;
   color: #aaa;
   font-size: 16px;
