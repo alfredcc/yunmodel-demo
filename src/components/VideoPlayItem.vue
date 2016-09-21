@@ -23,7 +23,7 @@
 <script>
 export default {
   ready () {
-    this.getVideoTime()
+    this.getVideoDuration()
   },
 
   props: {
@@ -50,7 +50,7 @@ export default {
         this.showVideoAction = true
       }.bind(this)
     },
-    getVideoTime() {
+    getVideoDuration() {
       let video = document.getElementById("product-video")
       video.onloadeddata = function (e){
         this.videoDuration =  Math.ceil(video.duration)
@@ -62,6 +62,12 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
+*::-webkit-media-controls-start-playback-button {
+  display: none!important;
+  -webkit-appearance: none;
+}
+
 
 .video-play-action {
   position: absolute;
