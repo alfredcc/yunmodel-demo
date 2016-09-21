@@ -9,7 +9,7 @@
         <p>
           <svg width="51px" height="51px" viewBox="326 485 102 102" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <g id="Play-Copy-2" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(327.000000, 486.000000)"> <path d="M50,100 C77.6142375,100 100,77.6142375 100,50 C100,22.3857625 77.6142375,0 50,0 C22.3857625,0 0,22.3857625 0,50 C0,77.6142375 22.3857625,100 50,100 L50,100 Z" id="Oval-89" stroke="#FFFFFF" stroke-width="2" opacity="0.3"></path> <path d="M40.6539427,67.9178205 L40.6539427,32.092021 L69.0410179,50.0041255 L40.6539427,67.9178205 L40.6539427,67.9178205 L40.6539427,67.9178205 Z M71.2247614,47.7010952 L41.3076344,28.2064526 C39.5326469,27.2410249 37.5,27.6720478 37.5,30.8116761 L37.5,69.1981653 C37.5,72.3155268 39.6805625,72.870608 41.3076344,71.8017984 L71.2247614,52.3087463 C72.9488532,51.0872495 72.9011385,48.8239815 71.2247614,47.7010952 L71.2247614,47.7010952 L71.2247614,47.7010952 Z" id="Fill-126" fill="#FFFFFF"></path> </g> </svg>
         </p>
-        7s'
+        {{videoDuration}}s'
         <div>
           <p class="product-meta-price">￥ {{productInfo.price}} 元</p>
           <p class="product-meta-tag">{{productInfo.tag}}</p>
@@ -23,6 +23,7 @@
 <script>
 export default {
   ready () {
+    this.getVideoTime()
   },
 
   props: {
@@ -35,7 +36,8 @@ export default {
 
   data () {
     return {
-      showVideoAction: true
+      showVideoAction: true,
+      videoDuration: 0.0
     }
   },
 
@@ -48,12 +50,19 @@ export default {
         this.showVideoAction = true
       }.bind(this)
     },
+    getVideoTime() {
+      let video = document.getElementById("product-video")
+      video.onloadeddata = function (e){
+        this.videoDuration =  Math.ceil(video.duration)
+      }.bind(this)
+    }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 .video-play-action {
   position: absolute;
   left: 50%;
