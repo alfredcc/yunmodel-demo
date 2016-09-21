@@ -31,10 +31,14 @@
     <!-- feed article -->
     <feed-article :articles="articles" :model-count="modelCount"></feed-article>
     <!-- action sheet -->
-    <actionsheet :show.sync="show"></actionsheet>
+    <actionsheet :show.sync="show" :tag-items="tagItems" :subscribed.sync="subscribed"></actionsheet>
     <!-- bottom action -->
     <div class="bottom-action">
-        <div class="button-block">代言该产品</div>
+        <div class="button-block" @click="subscribed=true" v-if="!subscribed">代言该产品</div>
+        <div class="bottom-action-subscribed" v-if="subscribed">
+          <a href="javascript:;" class="refund-button">提货/退货</a>
+          <a href="javascript:;" class="sub-button">订货</a>
+        </div>
     </div>
 </template>
 
@@ -48,9 +52,9 @@ import {Swiper, SwiperItem, Scroller } from 'vux/src/components/'
 
 const dataSource = {
   list: [
-  'http://static.yunmadou.13980.com/Upload/movie/index1.png@740w',
-  'http://static.yunmadou.13980.com/Upload/movie/%E9%A6%96%E5%9B%BE2.png@740w',
-  'http://static.yunmadou.13980.com/Upload/movie/%E9%A6%96%E5%9B%BE3.png@740w'
+    'http://static.yunmadou.13980.com/Upload/movie/index1.png@740w',
+    'http://static.yunmadou.13980.com/Upload/movie/%E9%A6%96%E5%9B%BE2.png@740w',
+    'http://static.yunmadou.13980.com/Upload/movie/%E9%A6%96%E5%9B%BE3.png@740w'
   ],
   intro: {
     title: '资生堂安耐晒',
@@ -58,7 +62,8 @@ const dataSource = {
     discountPrice: '255元',
   },
   modelCount: 2,
-  articleList: [{
+  articleList: [
+  {
     author: '大白',
     avatar: 'http://static.yunmadou.13980.com/Upload/movie/lADOZQAeiM0IoM0E2g_1242_2208.jpg@50h',
     rank: '明星麻豆',
@@ -82,6 +87,23 @@ const dataSource = {
     'http://static.yunmadou.13980.com/Upload/movie/IMG_2715.JPG@340h_350w_1e_1c'
     ]
   }
+  ],
+  tagItems: [
+    {
+      title: '金牌批发价',
+      style: 'gold-button',
+      content:'￥130/50件起 或 明星麻豆1件起拿'
+    },
+    {
+      title: '银牌批发价',
+      style: 'silver-button',
+      content:'￥130/50件起 或 明星麻豆1件起拿'
+    },
+    {
+      title: '铜牌批发价',
+      style: 'bronze-button',
+      content:'￥130/50件起 或 明星麻豆1件起拿'
+    }
   ]
 }
 
@@ -92,6 +114,8 @@ export default {
   data() {
     return {
       show: true,
+      subscribed: false,
+      tagItems: dataSource.tagItems,
       isActionSheetHidden: false,
       list: dataSource.list,
       title: dataSource.intro.title,
@@ -189,5 +213,30 @@ export default {
   color: #fff;
   background-color: #ddbf91;
   text-align: center;
+}
+
+.bottom-action-subscribed {
+  display: flex;
+  margin:10px;
+  font-weight: 400;
+  white-space: 100%;
+  line-height: 35px;
+  color: #fff;
+  font-size: 16px;
+  background-color: #fff;
+}
+
+.refund-button, .sub-button{
+  flex: 2;
+  margin: 0px;
+  line-height: 35px;
+  color: #fff;
+  background-color: #2a2829;
+  text-align: center;
+}
+
+.refund-button {
+  flex: 1;
+  background-color: #ddbf91;
 }
 </style>

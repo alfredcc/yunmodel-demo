@@ -43,8 +43,7 @@ import { Scroller } from 'vux/src/components/'
 
 export default {
   ready () {
-    console.log(this.articles.length)
-    console.log(this.modelCount)
+
   },
 
   components: {
